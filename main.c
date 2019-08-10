@@ -42,6 +42,13 @@ void countSalary(int salary)
 	else printf("upper");
 }
 
+void cekKabisat(int tahun) {
+	if(tahun % 4 == 0 && tahun % 100 != 0)
+		printf("Kabisat");
+	else
+		printf("Bukan Kabisat");
+}
+
 int main()
 {
 	float bmi = calcBmi(70,1.70);
@@ -61,4 +68,6 @@ int main()
 	printf("Penghasilan %d ", salary);
 	printf("Golongan income ");
 	countSalary(salary);
+	
+	cekKabisat(2020);
 }
