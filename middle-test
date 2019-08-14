@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+// a.
+bool cekKelipatanTiga(int angka) {
+    if(angka % 3 == 0)
+        return true;
+        return false;
+}
+
+// b.
+int arrAngkaLength;
+void deret(int x, int y) {
+	int i;
+	int arrAngka[100];
+	
+	for(i=x; i < y; i++) {
+		if(cekKelipatanTiga(i)) {
+			arrAngkaLength =+ i;
+			arrAngka[i] = i;
+			printf("%d,", arrAngka[i]);
+		}
+	}
+}
+
+// c.
+int main() {
+	// i.
+	deret(1, 80);
+	printf("\n\n");
+	
+	// ii.
+    int angka = 8;
+    printf("input: %d, output: %d", angka, cekKelipatanTiga(angka));
+    printf("\n\n");
+    
+    int x = 1;
+    int y = 10;
+    printf("input: %d, %d ", x, y);
+    printf("(bilangan kelipatan 3 antara %d sampai %d ", x, y);
+    printf("yaitu ");
+    deret(x,y);
+    printf("), output: %d", arrAngkaLength);
+}
