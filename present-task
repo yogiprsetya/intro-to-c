@@ -1,0 +1,94 @@
+#include <stdio.h>
+
+void inputPenumpang(char dataPenumpang[10][120], int jmlPenumpang) {
+	int i;
+	
+	system("@cls||clear");
+	printf("*Masukan data penumpang*\n");
+	
+	for(i=0; i < jmlPenumpang; i++) {
+		printf("Nama Penumpang %d: ", i+1);
+		scanf("%s", &dataPenumpang[i]);
+	}
+}
+
+void printDataPesawat(id, namaMaskapai) {	
+	system("@cls||clear");
+	printf("*Data manifest pesawat*\n");
+	
+	printf("No. Penerbangan: %s\n", id);
+	printf("Maskapai: %s\n\n", namaMaskapai);
+}
+
+void printDataPenumpang(char dataPenumpang[10][120], int jmlPenumpang) {
+	int i;
+	
+	printf("- Data Penumpang:\n");
+	
+	for(i=0; i < jmlPenumpang; i++) {
+		printf("Kursi %d: %s \n", i+1, dataPenumpang[i]);
+	}
+	printf("\n");
+}
+
+void saveManifest(char dataPenumpang[10][120], int jmlPenumpang, char id[15], char namaMaskapai[30]) {
+	int i;
+   	
+   	char filepath[256];
+	snprintf (filepath, sizeof(filepath), "%s-%s.txt", id, namaMaskapai);
+	FILE * file = fopen(filepath, "w");
+	
+	for(i=0; i < jmlPenumpang; i++) {
+		fprintf(file, "Kursi d: %s \n", dataPenumpang[i]);
+	}
+
+	fclose (file);
+}
+
+int main() {
+	char id[15], namaMaskapai[30], dataPenumpang[10][120];
+	int jmlPenumpang, navigasi;
+	
+	printf("*Masukan detail pesawat*\n");
+	
+	printf("No. Penerbangan: ");
+	scanf("%s", &id);
+	printf("Nama Maskapai: ");
+	scanf("%s", &namaMaskapai);
+	printf("Jumlah Penumpang: ");
+	scanf("%d", &jmlPenumpang);
+	
+	inputPenumpang(dataPenumpang, jmlPenumpang);
+	printDataPesawat(id, namaMaskapai);
+	printDataPenumpang(dataPenumpang, jmlPenumpang);
+	
+	while(1) {
+		printf("\n\n*********************\n");
+	    printf("\t*Simpan: Tekan [1]*\n");
+	    printf("\t*Ulang: Tekan [0]*\n");
+		scanf("%d", &navigasi);
+		
+		switch(navigasi) {
+			case 1:
+				saveManifest(dataPenumpang, jmlPenumpang, id, namaMaskapai);
+				printf("\t*Berhasil disimpan, tekan tombol!*\n");
+				getch();
+				exit(1);
+				break;
+				
+			case 0:
+				system("@cls||clear");
+            	main();
+                break;
+				
+			default:
+            printf("\nPilihan tidak Tersedia..");
+            printf("\nTekan tombol, untuk mengulang!");
+
+            getch();
+            break;
+		}
+		
+		return 0;
+	}
+}
